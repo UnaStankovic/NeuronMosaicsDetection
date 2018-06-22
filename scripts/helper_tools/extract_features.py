@@ -17,7 +17,7 @@ if len(argv) >= 3:
 	output = argv[2]
 
 data = FeatureSpace.NewFromDirectory(input_dir, n_jobs=True)
-pd.DataFrame(data.data_matrix, columns = data.feature_names).to_csv(output)
+pd.DataFrame(data.data_matrix, columns = data.feature_names).to_csv(output, index= False)
 
 #remove *.sig files
 system('rm ' + input_dir + '/*/*.sig')
