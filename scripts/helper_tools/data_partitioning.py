@@ -14,7 +14,7 @@ elif len(argv) >= 2:
 	exit()
 
 if len(argv) >= 3:
-	output = argv[2]
+	output_dir = argv[2]
 
 if len(argv) >= 4:
 	partitions = int(argv[3])
