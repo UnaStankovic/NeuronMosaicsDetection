@@ -17,8 +17,6 @@ total=0;
 while [ $i -lt $# ]; do
 	clear;
 	
-	interval=$((end-start));
-	total=$((total+interval));
 	if [ $total -gt 0 ]; then
 		echo "[$((i-1))] Finished in: $(convertsecs interval).";
 		echo "Time elapsed: $(convertsecs total).";
@@ -28,14 +26,17 @@ while [ $i -lt $# ]; do
 
 	i=$((i+1));
 	echo "Running feature extraction for ${!i}... [$((i-1))/$(($#-1)) | "$(echo "scale=2; $((i-1))*100/$(($#-1))" | bc -l)"%]"
-	start=$(date +'%s')
-	python extract_features.py ${!i} $1/data_${i}.csv > /dev/null
-	end=$(date +'%s')
+	start=$(date +'%s');
+	python extract_features.py ${!i} $1/data_$((i-1)).csv > /dev/null;
+	end=$(date +'%s');
+
+	interval=$((end-start));
+	total=$((total+interval));
 done
 
 clear;
 
-echo "[${i}] Finished in: $(convertsecs interval).";
+echo "[$((i-1))] Finished in: $(convertsecs interval).";
 echo "Time elapsed: $(convertsecs total).";
 echo;
 
