@@ -25,26 +25,26 @@ scaler.fit(X_train)
 X_train = scaler.transform(X_train)
 X_test = scaler.transform(X_test)
 
-#model selection ({'n_neighbors': 4})
+#model selection ({'n_neighbors': 6})
 params = {
     'n_neighbors' : [x for x in range(3, 10)]
 }
 
-clf = GridSearchCV(KNeighborsClassifier(), params, cv = 5, n_jobs = 4)
+clf = GridSearchCV(KNeighborsClassifier(weights = 'distance', p = 1), params, cv = 5, n_jobs = 4)
 clf.fit(X_train, y_train)
 
 print(clf.best_params_)
 
 #train algorithm
-model = KNeighborsClassifier(n_neighbors = clf.best_params_['n_neighbors'])
+model = KNeighborsClassifier(n_neighbors = clf.best_params_['n_neighbors'], weights = 'distance', p = 1)
 model.fit(X_train, y_train)
 
-#model evaluation on the test data (score = 0.831081081081081)
+#model evaluation on the test data (score = 0.8108108108108109)
 y_pred = model.predict(X_test)
 print(metrics.accuracy_score(y_test, y_pred))
 
-#model evaluation using cross validation (score = 0.8152958152958153)
-model = KNeighborsClassifier(n_neighbors = clf.best_params_['n_neighbors'])
+#model evaluation using cross validation (score = 0.8325602968460112)
+model = KNeighborsClassifier(n_neighbors = clf.best_params_['n_neighbors'], weights = 'distance', p = 1)
 
 scaler.fit(X)
 X = scaler.transform(X)
