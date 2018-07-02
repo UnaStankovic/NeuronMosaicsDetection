@@ -7,9 +7,8 @@ ARR_LEN = 230
 DESC_LEN = 128
 
 #function takes vector whose each component is number of cluster of the descriptor
-#the length of the vector is a number of descriptors of the image
-#return value is a vector of length 230 containing frequencies of each cluster between
-#the descriptor of that image
+#the length of the vector is number of descriptors of the image
+#return value is a vector of length 230 containing frequencies of each cluster for the descriptors of that image
 def make_array_230(descriptor_predicted):
     result = np.zeros((ARR_LEN))
     unique, counts = np.unique(descriptor_predicted, return_counts=True)
@@ -17,7 +16,6 @@ def make_array_230(descriptor_predicted):
     for key, val in dict_occurs.iteritems():
         result[key] = val
     return result
-
 
 def construct_all_230(data, output_filename='sift_230.csv'):
     indexes = [str(i) for i in range(0,DESC_LEN)]
