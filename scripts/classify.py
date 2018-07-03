@@ -3,6 +3,8 @@ from sklearn.externals import joblib
 import pandas as pd
 
 from sys import argv
+from tempfile import NamedTemporaryFile
+from wndcharm import FeatureSpace as fs
 
 def detect_model_type(model_name):
 	if 'charm' in model_name:
@@ -16,8 +18,19 @@ def extract_features(img_name, model_name):
 	model_type = detect_model_type(model_name)
 	
 	if model_type == 'charm':
-		#handle charm...
-		pass
+		f = NamedTemporaryFile()
+		f.file.write(img_name + '\t' + ('True' if 'True' in img_name else 'False'))
+		f.flush()
+		data = fs.FeatureSpace.NewFromFileOfFiles(f.name, write_sig_files_to_disk=False, quiet=True, n_jobs = True)
+		f.close()
+
+		data = pd.DataFrame(data.data_matrix, columns = data.feature_names)
+
+		f = file('config/charm_features', 'r')
+		data = data[f.read().splitlines()]
+		f.close()
+		
+		return joblib.load('scalers/scaler_charm.pkl').transform(data)
 	elif model_type == 'sift':
 		#handle sift
 		pass
