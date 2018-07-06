@@ -1,3 +1,4 @@
+#This file does classification, it is demonstration. Firstly, it receives trained model name and it checks whether it is sift or charm, 
 from sklearn.externals import joblib
 
 import pandas as pd

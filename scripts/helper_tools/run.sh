@@ -1,3 +1,4 @@
+#This is some progress tracking script. 
 #!/bin/bash
 
 convertsecs() {

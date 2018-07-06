@@ -1,3 +1,5 @@
+#This file reduces number of pictures in each folder. Each folder contains partitions number of pictures. 
+#For example, if we had 10000 pictures and partitions = 10,they would be divided into 10 folders with 1000 pictures in it.
 from os import makedirs, walk
 from os.path import isdir, join
 from shutil import copy, rmtree

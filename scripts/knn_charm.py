@@ -1,3 +1,4 @@
+#This file does K Nearest Neighbors classification of the images. 
 from sklearn import preprocessing
 from sklearn import metrics
 from sklearn.neighbors import KNeighborsClassifier
@@ -14,7 +15,7 @@ data_new = data[data['class'] == True]
 data_new = data_new.append(data[data['class'] == False][0:493], ignore_index = True)
 data = data_new
 
-#data preprocessing
+#data preprocessing X are all columns minus class, 
 X = data.drop(['class'], axis = 1)
 y = data['class']
 
@@ -29,13 +30,13 @@ X_test = scaler.transform(X_test)
 params = {
     'n_neighbors' : [x for x in range(3, 10)]
 }
-
+#n_jobs is number of processors where this program should be executed 
 clf = GridSearchCV(KNeighborsClassifier(weights = 'distance', p = 1), params, cv = 5, n_jobs = 4)
 clf.fit(X_train, y_train)
 
 print(clf.best_params_)
 
-#train algorithm
+#train algorithm, p = 1 is Manhattan distance
 model = KNeighborsClassifier(n_neighbors = clf.best_params_['n_neighbors'], weights = 'distance', p = 1)
 model.fit(X_train, y_train)
 

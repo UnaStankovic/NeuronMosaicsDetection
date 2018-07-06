@@ -1,3 +1,4 @@
+#This file merges all .csv files for each partitioned folder into one.
 from sys import argv
 from os.path import isfile
 import pandas as pd

@@ -1,3 +1,5 @@
+#This script checks the progress of the feature extraction.
+#When one image is processed the .sig file is created so we followed the number of sig files to track how many images were processed.
 from os import walk
 from os.path import isdir
 from sys import argv

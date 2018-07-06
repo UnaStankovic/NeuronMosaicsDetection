@@ -1,3 +1,5 @@
+#This file is used for cropping images into 500x500 dimensions. 
+#x[1] is the x-coordinate, x[2] is the y-coordinate (upper-left coordinates), x[3] whether the neuron is in the pic (in that cutted section).
 from PIL import Image
 from os import makedirs
 from shutil import rmtree

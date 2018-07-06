@@ -1,3 +1,4 @@
+#This file extracts features, we give it one folder containing pictures and this code will count features for each picture of that folder.
 import pandas as pd
 from wndcharm.FeatureSpace import *
 from os.path import isdir
